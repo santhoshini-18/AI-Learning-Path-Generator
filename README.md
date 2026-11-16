@@ -72,6 +72,15 @@ Include topics, exercises, and learning resources.
 - Google Docs learning plan.
 - Google Calendar study schedule.
 
+## 🔄 Workflow Architecture
+
+![Workflow Architecture](workflow.png)
+
+## 📸 Project Output
+
+![Generated Learning Roadmap](Output.png)
+
+
 ## 🔐 Security
 
 - API keys and authentication tokens should never be committed to GitHub.
