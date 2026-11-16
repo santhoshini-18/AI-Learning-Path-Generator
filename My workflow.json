@@ -1,0 +1,125 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI Learning Path Generator.\n\nCreate personalized day-wise learning plans based on the user's learning goal, skill level, available study hours and duration.\n\nFollow these steps:\n\n1. Create a structured day-wise curriculum with topics, objectives and practical exercises.\n2. Use SerpAPI to search for relevant YouTube tutorials, official documentation and free learning resources.\n3. Include actual clickable URLs for all resources. Never invent links.\n4. Use Composio tools to create a Google Doc containing the complete learning roadmap.\n5. Use Google Calendar tools to schedule daily learning sessions based on the user's preferred study time.\n6. Include topics, exercises and resource links in calendar event descriptions.\n7. Provide the Google Doc link and calendar confirmation in your final response.\n\nKeep the learning plan practical, beginner-friendly and easy to follow.\n\nAsk the user for missing essential information before proceeding.\n\nNever claim a document or calendar event was created unless the corresponding tool confirms success."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        48,
+        0
+      ],
+      "id": "3e6309be-2611-4016-ae6c-80b35584f6fa",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://connect.composio.dev/mcp",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        184,
+        232
+      ],
+      "id": "18edfa0d-d0d6-4256-8f43-ba945be187ce",
+      "name": "MCP Client",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "dFkAnICShNe2cC0j",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "17fd8265-7fc5-48ce-996d-ca1bceed6783",
+      "name": "When chat message received"
+     
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        56,
+        232
+      ],
+      "id": "880f0d46-b02f-4e34-922a-4cd2d5fb854d",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "1rdxUt3nvOsBs3AK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "318d7ffe-e951-49ca-8898-034130e61c27",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    
+  },
+  "nodeGroups": [],
+  "id": "kqar1tHgviAY6P1u",
+  "tags": []
+}
