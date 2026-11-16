@@ -58,14 +58,14 @@ The application automates curriculum generation, learning resource discovery, Go
 ## 💡 Example Input
 
 ```text
-Create a 7-day Python learning path.
+Create a 3-day Python learning path.
 I am a beginner and can study 2 hours daily.
 Include topics, exercises, and learning resources.
 ```
 
 ## 📌 Expected Output
 
-- Personalized 7-day learning roadmap.
+- Personalized 3-day learning roadmap.
 - Daily topics and learning objectives.
 - Practical coding exercises.
 - Relevant learning resource links.
